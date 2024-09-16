@@ -42,11 +42,11 @@ float verificar_f(float num){
 // Función para añadir productos
 void add_product(){
 	char ch;
-	int size;
+	int size; // Un entero que representa la cantidad de elementos del nombre
 	product new;
 	list.first_element = realloc(list.first_element, (list.product_num + 1) * sizeof(product));
 
-	new.name = (char *)malloc(1);
+	new.name = (char *)malloc(1); // Reservar memoria para el nombre
 	puts("Ingrese el nombre del producto:");
 	for (size = 1; (ch = getchar()) != '\n'; size++) {
         new.name = (char *)realloc(new.name, size * sizeof(char));
@@ -64,15 +64,15 @@ void add_product(){
 // Función para eliminar productos
 void delete_product(){
 	int index = 0;
-	product aux;
+	product aux; // Variable auxiliar para ir cambiando el orden de los elementos
 	puts("Ingrese el indice del producto a borrar");
 	index = verificar(index, 0, list.product_num - 1);
-	for (int i = index; i < list.product_num - 1; i++){
+	for (int i = index; i < list.product_num - 1; i++){ // Bubble Sort
 		aux = list.first_element[i];
 		list.first_element[i] = list.first_element[i + 1];
 		list.first_element[i + 1] = aux;
 	}
-	list.first_element = realloc(list.first_element, --list.product_num * sizeof(product));
+	list.first_element = realloc(list.first_element, --list.product_num * sizeof(product)); // Realloc para acortar el array
 }
 
 // Función para editar productos
@@ -126,7 +126,7 @@ int main(void) {
 		else if (option == 5)
 			total_cost();
 		else{
-			free(list.first_element);
+			free(list.first_element); // Liberar memoria
 			return 0; // Salir del programa
 		}
 	}
